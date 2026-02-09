@@ -11,7 +11,9 @@ dotenv.config()
 const app = express();
 const PORT = process.env.PORT
 
-app.use(express.json()) // allow to extract json data out of body
+app.use(express.json({ limit: "10mb" })); // to increase data limit specially for image
+app.use(express.urlencoded({ extended: true, limit: "10mb" }));
+// allow to extract json data out of body
 app.use(cookieParser()) // allow to parse the cookies
 app.use(cors(
     {

@@ -91,15 +91,15 @@ export const logout = (req, res) => {
 
 export const updateProfile = async (req, res) => {
     try {
-        const { profillePic } = req.body;
+        const { profilePic } = req.body;
         const userId = req.user._id // we're calling next function in protectRoute and there we've defined about user that's why here we can use user directly
 
-        if (!profillePic) {
+        if (!profilePic) {
             return res.status(400).json({ message: "Profile pic is required" })
         }
 
-        const uploadResponse = await cloudinary.uploader.upload(profillePic) // uploading in cloudinary, cloudinary is just a bucket for our images
-        const updatedUser = await User.findById(userId, { profilePic: uploadResponse.secure_url }, { new: true }) // hover over new to get more details
+        const uploadResponse = await cloudinary.uploader.upload(profilePic) // uploading in cloudinary, cloudinary is just a bucket for our images
+        const updatedUser = await User.findByIdAndUpdate(userId, { profilePic: uploadResponse.secure_url }, { new: true }) // hover over new to get more details
 
         res.status(200).json(updatedUser) // so that ui can be updated immediately
     } catch (error) {
