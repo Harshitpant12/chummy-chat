@@ -17,9 +17,10 @@ const Navbar = () => {
               to="/"
               className="flex items-center gap-2.5 hover:opacity-80 transition-all"
             >
-              <div className="h-9 w-auto bg-primary/10 flex items-center justify-center">
-                <img src="/chummy_logo.png" />
+              <div className="size-9 rounded-lg bg-primary/10 flex items-center justify-center">
+                <img src="/chummy.png" className="w-6 h-6 text-primary" />
               </div>
+              <h1 className="text-lg font-bold">Chummy</h1>
             </Link>
           </div>
 
