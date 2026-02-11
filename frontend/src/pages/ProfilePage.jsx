@@ -1,10 +1,12 @@
 import React, { useState } from 'react'
 import { useAuthStore } from '../store/useAuthStore'
-import { Camera, Mail, User } from 'lucide-react'
+import { Camera, Mail, User, ArrowLeft } from 'lucide-react'
+import { useNavigate } from 'react-router-dom'
 
 const ProfilePage = () => {
   const {authUser, isUpdatingProfile, updateProfile} = useAuthStore()
   const [selectedImg, setSelectedImg] = useState(null)
+  const navigate = useNavigate() // for navigation
 
   const handleImageUpload = async (e) => {
     const file = e.target.files[0];
@@ -19,16 +21,20 @@ const ProfilePage = () => {
       await updateProfile({profilePic: base64Image})
     }
   }
+
   return (
     <div className='h-screen pt-20'>
       <div className='max-w-2xl mx-auto p-4 py-8'>
         <div className='bg-base-300 rounded-xl p-6 space-y-8'>
-          <div className="text-center">
+          <div className="flex items-center gap-2">
+            <ArrowLeft 
+              className="w-6 h-6 cursor-pointer hover:text-blue-500 transition-colors"
+              onClick={() => navigate("/")}
+            />
             <h1 className='text-2xl font-semibold'>Profile</h1>
-            <p className='mt-2'>Your information</p>
           </div>
+          <p className='mt-2 ml-8'>Your information</p>
 
-          {/* upload your profile pic */}
           <div className="flex flex-col items-center gap-4">
             <div className="relative">
               <img

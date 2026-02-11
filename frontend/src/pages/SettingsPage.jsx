@@ -1,50 +1,63 @@
-import React from 'react'
-import { useThemeStore } from '../store/useThemeStore'
-import {THEMES} from "../constants"
-import { Send } from 'lucide-react'
+import React from "react";
+import { useThemeStore } from "../store/useThemeStore";
+import { THEMES } from "../constants";
+import { Send, X } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const PREVIEW_MESSAGES = [
-  {id: 1, content:"Bonjour! Comment ça va?", isSent: false},
-  {id: 2, content:"Ça va bien et toi?", isSent: true},
-]
+  { id: 1, content: "Bonjour! Comment ça va?", isSent: false },
+  { id: 2, content: "Ça va bien et toi?", isSent: true },
+];
 
 const SettingsPage = () => {
-  const {theme, setTheme} = useThemeStore()
+  const { theme, setTheme } = useThemeStore();
+  const navigate = useNavigate(); // used for navigation
+
   return (
-    <div className='h-screen container mx-auto px-4 pt-20 max-w-5xl'>
-      <div className='space-y-6'>
-        <div className='flex flex-col gap-1'>
-          <h2 className='text-lg font-semibold'>Theme</h2>
-          <p className='text-sm text-base-content/70'>Choose a theme of your choice</p>
+    <div className="h-screen container mx-auto px-4 pt-20 max-w-5xl">
+      <div className="flex justify-end mb-4">
+        <X
+          className="w-6 h-6 cursor-pointer hover:text-red-500 transition-colors"
+          onClick={() => navigate("/")}
+        />
+      </div>
+
+      <div className="space-y-6">
+        <div className="flex flex-col gap-1">
+          <h2 className="text-lg font-semibold">Theme</h2>
+          <p className="text-sm text-base-content/70">
+            Choose a theme of your choice
+          </p>
         </div>
 
-        <div className='grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 gap-2'>
+        <div className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 gap-2">
           {THEMES.map((t) => (
             <button
-            key={t}
-            className={`
+              key={t}
+              className={`
               group flex flex-col items-center gap-1.5 p-2 rounded-lg transition-colors
               ${theme === t ? "bg-base-200" : "hover:bg-base-200/50"}
               `}
-            onClick={() => setTheme(t)}
+              onClick={() => setTheme(t)}
             >
-              <div className='relative h-8 w-full rounded-md overflow-hidden' data-theme={t}>
-                <div className='absolute inset-0 grid grid-cols-4 gap-px p-1'>
-                  <div className='rounded bg-primary'></div>
-                  <div className='rounded bg-secondary'></div>
-                  <div className='rounded bg-accent'></div>
-                  <div className='rounded bg-neutral'></div>
+              <div
+                className="relative h-8 w-full rounded-md overflow-hidden"
+                data-theme={t}
+              >
+                <div className="absolute inset-0 grid grid-cols-4 gap-px p-1">
+                  <div className="rounded bg-primary"></div>
+                  <div className="rounded bg-secondary"></div>
+                  <div className="rounded bg-accent"></div>
+                  <div className="rounded bg-neutral"></div>
                 </div>
               </div>
-              <span className='text-[11px] font-medium truncate w-full text-center'>
+              <span className="text-[11px] font-medium truncate w-full text-center">
                 {t.charAt(0).toUpperCase() + t.slice(1)}
               </span>
-
             </button>
-          ))
-          }
+          ))}
         </div>
-                {/* Preview Section */}
+        {/* Preview Section */}
         <h3 className="text-lg font-semibold mb-3">Preview</h3>
         <div className="rounded-xl border border-base-300 overflow-hidden bg-base-100 shadow-lg">
           <div className="p-4 bg-base-200">
