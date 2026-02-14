@@ -11,7 +11,7 @@
 ## Live Demo
 
 [**View Live Application**](https://chummy.onrender.com/)  
-_(Note: The backend is hosted on a free tier, so the initial request may take 30-60 seconds to spin up.)_
+_(Note: The website is hosted on a free tier, so the initial request may take 30-60 seconds to spin up.)_
 
 ---
 
