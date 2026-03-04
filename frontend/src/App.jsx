@@ -22,6 +22,13 @@ const App = () => {
     checkAuth();
   }, [checkAuth]);
 
+  useEffect(() => {
+    // Dynamically set the theme on the body element
+    if (theme) {
+      document.body.setAttribute("data-theme", theme);
+    }
+  }, [theme]);
+
   console.log({ authUser });
 
   if (isCheckingAuth && !authUser)
@@ -32,7 +39,7 @@ const App = () => {
     );
 
   return (
-    <div data-theme={theme}>
+    <div>
       <Navbar />
       <Routes>
         <Route
