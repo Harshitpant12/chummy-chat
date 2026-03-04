@@ -23,9 +23,9 @@ const App = () => {
   }, [checkAuth]);
 
   useEffect(() => {
-    // Dynamically set the theme on the body element
     if (theme) {
       document.body.setAttribute("data-theme", theme);
+      console.log("Theme applied:", theme);
     }
   }, [theme]);
 
